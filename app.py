@@ -27,10 +27,12 @@ def data():
     res_SummonerName = requests.get(url=url_SummonerName, headers=headers)
     account_Id = res_SummonerName.json()['accountId']  # account Id 가져오기
 
-    url_GameId = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/{}".format(account_Id)
-    res_GameId = requests.get(url=url_GameId, headers=headers)
-    Matches = res_GameId.json()['matches']
-    # match_Id = res_GameId.json()['gameId']
+    url_Matches = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/{}".format(account_Id)
+    res_Matches = requests.get(url=url_Matches, headers=headers)
+    matches = res_Matches.json()['matches']
+    # url_MatchId = "https://kr.api.riotgames.com/lol/match/v4/matches{}".format(Matches)
+    # res_MatchId = requests.get(url=url_MatchId, headers=headers)
+    print(matches)
 
     # url_MatchId = "https://kr.api.riotgames.com/lol/match/v4/matches{}".format(match_Id)
     # res_MatchId = requests.get(url=url_MatchId, headers=headers)
@@ -38,11 +40,11 @@ def data():
     Game_Ids = []
     Match_list = []
     for match in range(0, 20):
-        Game_Ids.append(Matches[match].get('gameId'))
-        Match_list.append(Matches[match])
+        Game_Ids.append(matches[match].get('gameId'))
+        Match_list.append(matches[match])
 
-    print(Match_list)
-    print(Game_Ids)
+    #print(Match_list)
+    #print(Game_Ids)
 
     return render_template('search.html', sum_name=sum_name, Game_Ids=Game_Ids, Match_list=Match_list)
 
