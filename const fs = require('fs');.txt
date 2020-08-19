@@ -1,0 +1,100 @@
+const fs = require('fs');
+const http = require('http');
+const gpio = require('node-wiring-pi');
+const socketio = require('socket.io');
+const mcpadc = require('mcp-spi-adc');
+
+const CS_MCP3208 = 10
+const VRX = 0
+const VRY = 1
+const LIGHT = 2
+const SPI_SPEED = 1000000
+
+const BUTTON = 25;
+const BLUE = 29;
+const RED = 28;
+const GREEN = 27;
+var count = 0;
+var timerid, timeout=800;
+var xvalue = yvalue = lightdata = -1;
+
+
+
+const joyx = mcpadc.openMcp3208(VRX, {speedHz: SPI_SPEED},
+                                (err) => {
+                                        console.log("SPI 채널0 초기화완료!");
+                                        if(err) console.log("채널0초기화실패!(HW점검!)");
+                                });
+
+const joyy = mcpadc.openMcp3208(VRY, {speedHz:SPI_SPEED},
+                                (err) => {
+                                        console.log("SPI 채널1초기화완료!");
+                                        if(err)console.log("채널1초기화실패!(HW점검!)");
+                                });
+
+const lightsensor = mcpadc.openMcp3208(LIGHT, {speedHz: SPI_SPEED},
+                                (err) => {
+                                        console.log("SPI 채널2초기화완료!");
+                                        if(err) console.log("채널0초기화실패!(HW점검!)");
+                                });
+
+const checkButton = () =>{
+        let buttondata = gpio.digitalRead(BUTTON);
+        if(!buttondata){
+                gpio.softPwmWrite(BLUE,50);
+                JoyStick();
+        }else{
+                gpio.softPwmWrite(BLUE,0);
+}
+
+const JoyStick = () => {
+        joyx.read((error,reading)=>{
+                console.log("  ◀▶(%d)", reading.rawValue);
+                xvalue = reading.rawValue;
+                if(xvalue >3900 && xvalue<100){
+                count++;
+                console.log("changed");
+                if((count%3)==0){
+                        gpio.softPwmWrite(GREEN,0);
+                        gpio.softPwmWrite(BLUE,50);
+                }else if((count&3)==1){
+                        gpio.softPwmWrite(BLUE,0);
+ gpio.softPwmWrite(RED,50);
+                        console.log("red");
+                }else if((count%3)==2){
+                        gpio.softPwmWrite(RED,0);
+                        gpio.softPwmWrite(GREEN,50);
+                        console.log("green");
+                        }
+                }
+        });
+
+        joyy.read((error, reading) =>{
+                console.log("   ▲▼  (%d)", reading.rawValue);
+                yvalue = reading.rawValue;
+                checklight(yvalue);
+        });
+
+        lightsensor.read((error,reading)=>{
+                console.log(" light : (%d)", reading.rawValue);
+                lightdata = reading.rawValue;
+        });
+
+        if(xvalue != -1 && yvalue != -1 && lightdata != -1){
+                io.sockets.emit('watch', xvalue, yvalue, lightdata);
+                xvalue = yvalue = lightdata = -1;
+        }
+        timerid = setTimeout(JoyStick, timeout);
+}
+const checklight = (yvalue) =>{
+        if((count%3)==0){
+                if(yvalue<2000)
+                        gpio.softPwmWrite(BLUE, 60);
+                if(yvalue<1500)
+                        gpio.softPwmWrite(BLUE, 75);
+                if(yvalue<1000)
+                        gpio.softPwmWrite(BLUE, 90);
+                if(yvalue<500)
+                        gpio.softPwmWrite(BLUE, 100);
+                if(yvalue>2100)
+

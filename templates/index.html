@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="ko">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+
+        <title>BSG.KR</title>
+        <style>
+            body {
+                padding-top: 2rem;
+                margin: auto;
+                width: 900px
+            }
+
+            @media (min-width: 576px) {
+                .card-group.card-group-scroll {
+                    overflow-x: auto;
+                    flex-wrap: nowrap;
+                }
+
+                .card-group.card-group-scroll > .card {
+                    flex-basis: 35%;
+                }
+            }
+
+            .mb-4 {
+                color: black;
+            }
+
+            .fadeIn {
+                margin: auto
+            }
+
+            .patch_note {
+                display: flex;
+                margin-left: 20px;
+            }
+
+            .champion_tier_table {
+                display: flex;
+                flex-wrap: nowrap
+            }
+
+            .main-box {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                line-height: 1
+            }
+
+            .main-box__content {
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+            }
+
+            .main-box__content__wrapper {
+                border: 1px solid #e6e6e6;
+                background-color: #fff;
+                width: 100%;
+                margin-left: 15px;
+            }
+
+            .main-box__content__champion img {
+                margin-top: 10px;
+                width: 50%;
+                height: 50%
+            }
+
+            .main-box__content__champions {
+            <!-- 이상함 --> display: flex;
+            }
+
+            @media (min-width: 475px) {
+                .main-box__content__champions {
+                    padding: 8px 8px 24px
+                }
+            }
+
+            @media (min-width: 992px) {
+                .main-box__content__champions {
+                    justify-content: space-around
+                }
+            }
+
+            @media (min-width: 1200px) {
+                .main-box__content--no-roles .main-box__content__champion + .main-box__content__champion {
+                    margin-left: 1rem
+                }
+            }
+
+            .patch_box {
+                display: flex;
+                flex-wrap: nowrap;
+            }
+
+            .B_N_list {
+                display: flex;
+
+            }
+
+            .burf_champs {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .burf_champ {
+                display: flex;
+                flex-direction: column;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <main class="mt-5 pt-5">
+            <div class="container">
+
+                <div class="search-body text-white text-center py-5 px-5 my-5">
+
+                    <h1 class="mb-4">
+                        <strong>BSG.KR</strong>
+                    </h1>
+
+                    <form action="/search">
+                        <input type="text" name="name"/>
+                        <input type="submit" value="Submit"/>
+                    </form>
+
+                    <form class="summoner-search-form" action="/summoner/" autocomplete="off">
+                        <input type="text" name="userName" class="summoner-search-form__text _suggest"
+                               placeholder="소환사명 닉네임" autocomplete="off">
+                        <button type="submit" class="btn btn-primary btn-lg summoner-search-form__button"> 검색
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <hr class="my-5">
+            <h2 class="h3 text-center my-5 font-weight-bold">라인 별 챔피언 티어</h2>
+            <div class='champion_tier_table'>
+                <div class="mt-3">
+                    <div class="main-box">
+                        <div class="main-box__header main-box__header--big">
+                            <div class="main-box__header__version">
+                                v10.16
+                            </div>
+
+                            <div class="main-box__header__title">
+                                소환사의 협곡 티어
+                            </div>
+
+                        </div>
+                        <div class="main-box__content">
+                            <div class="main-box__content__wrapper">
+                                <div class="main-box__content__title">
+                                    <img src="https://poro.gg/images/lol/role/top.svg" alt="탑">
+                                    <span class="d-none d-sm-inline-block">탑</span>
+                                </div>
+                                <div class="main-box__content__champions">
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/camille/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Camille.png"
+                                                 alt="카밀">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">카밀</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/darius/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Darius.png"
+                                                 alt="다리우스">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">다리우스</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/renekton/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Renekton.png"
+                                                 alt="레넥톤">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">레넥톤</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/fiora/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Fiora.png"
+                                                 alt="피오라">
+                                            <div class="main-box__content__champion__tier tier-background--a">
+                                                A
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">피오라</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/akali/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Akali.png"
+                                                 alt="아칼리">
+                                            <div class="main-box__content__champion__tier tier-background--a">
+                                                A
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">아칼리</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/irelia"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Irelia.png"
+                                                 alt="이렐리아">
+                                            <div class="main-box__content__champion__tier tier-background--a">
+                                                A
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">이렐리아</span>
+                                    </div>
+                                </div>
+                            </div> <!-- 탑  -->
+                            <div class="main-box__content__wrapper">
+                                <div class="main-box__content__title">
+                                    <img src="https://poro.gg/images/lol/role/jng.svg" alt="정글">
+                                    <span class="d-none d-sm-inline-block">정글</span>
+                                </div>
+                                <div class="main-box__content__champions">
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/leesin/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/LeeSin.png"
+                                                 alt="리 신">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">리 신</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/ekko/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Ekko.png"
+                                                 alt="에코">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">에코</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/graves/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Graves.png"
+                                                 alt="그레이브즈">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">그레이브즈</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/elise/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Elise.png"
+                                                 alt="엘리스">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">엘리스</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/karthus/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Karthus.png"
+                                                 alt="카서스">
+                                            <div class="main-box__content__champion__tier tier-background--a">
+                                                A
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">카서스</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/nidalee/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Nidalee.png"
+                                                 alt="니달리">
+                                            <div class="main-box__content__champion__tier tier-background--a">
+                                                A
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">니달리</span>
+                                    </div>
+                                </div>
+                            </div> <!-- 정글 -->
+                            <div class="main-box__content__wrapper">
+                                <div class="main-box__content__title">
+                                    <img src="https://poro.gg/images/lol/role/mid.svg" alt="미드">
+                                    <span class="d-none d-sm-inline-block">미드</span>
+                                </div>
+                                <div class="main-box__content__champions">
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/zed/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Zed.png"
+                                                 alt="제드">
+                                            <div class="main-box__content__champion__tier tier-background--ss">
+                                                S+
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">제드</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/yasuo/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Yasuo.png"
+                                                 alt="야스오">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">야스오</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/yone/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Yone.png"
+                                                 alt="요네">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">요네</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/sylas/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Sylas.png"
+                                                 alt="사일러스">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">사일러스</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/akali/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Akali.png"
+                                                 alt="아칼리">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">아칼리</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/zoe/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Zoe.png"
+                                                 alt="조이">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">조이</span>
+                                    </div>
+                                </div>
+                            </div> <!-- 미드 -->
+                            <div class="main-box__content__wrapper">
+                                <div class="main-box__content__title">
+                                    <img src="https://poro.gg/images/lol/role/adc.svg" alt="원딜">
+                                    <span class="d-none d-sm-inline-block">원딜</span>
+                                </div>
+                                <div class="main-box__content__champions">
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/caitlyn/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Caitlyn.png"
+                                                 alt="케이틀린">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">케이틀린</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/ezreal/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Ezreal.png"
+                                                 alt="이즈리얼">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">이즈리얼</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/ashe/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Ashe.png"
+                                                 alt="애쉬">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">애쉬</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/lucian/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Lucian.png"
+                                                 alt="루시안">
+                                            <div class="main-box__content__champion__tier tier-background--b">
+                                                B
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">루시안</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/yasuo/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Yasuo.png"
+                                                 alt="야스오">
+                                            <div class="main-box__content__champion__tier tier-background--b">
+                                                B
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">야스오</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/hjin/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Jhin.png"
+                                                 alt="진">
+                                            <div class="main-box__content__champion__tier tier-background--b">
+                                                B
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">진</span>
+                                    </div>
+                                </div>
+                            </div> <!-- 원딜 -->
+                            <div class="main-box__content__wrapper">
+                                <div class="main-box__content__title">
+                                    <img src="https://poro.gg/images/lol/role/sup.svg" alt="서포터">
+                                    <span class="d-none d-sm-inline-block">서포터</span>
+                                </div>
+                                <div class="main-box__content__champions">
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/thresh/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Thresh.png"
+                                                 alt="쓰레쉬">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">쓰레쉬</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/blitzcrank/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Blitzcrank.png"
+                                                 alt="블리츠크랭크">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">블리츠크랭크</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/morgana/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Morgana.png"
+                                                 alt="모르가나">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">모르가나</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/senna/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Senna.png"
+                                                 alt="세나">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">세나</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/lux/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Lux.png"
+                                                 alt="럭스">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">럭스</span>
+                                    </div>
+                                    <div class="main-box__content__champion">
+                                        <a href="https://kr.leagueoflegends.com/ko-kr/champions/lulu/"
+                                           data-toggle="tooltip"
+                                           class="tooltipstered">
+                                            <img src="//ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/Lulu.png"
+                                                 alt="룰루">
+                                            <div class="main-box__content__champion__tier tier-background--s">
+                                                S
+                                            </div>
+                                        </a>
+                                        <span class="main-box__content__champion__name">룰루</span>
+                                    </div>
+                                </div>
+                            </div> <!-- 서폿 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="h3 text-center my-5 font-weight-bold">패치 노트</h2>
+            <div class="my-5 patch_note">
+                <div class="mt-3">
+                    <div class="patch_box">
+                        <div class="patch_box__content">
+                            <a href="https://kr.leagueoflegends.com/ko-kr/news/game-updates/patch-10-16-notes/"
+                               class="text-center my-5 font-weight-bold">10.16패치 노트</a>
+                            <div class="B_N_list">
+                                <div class="burf_champs">
+                                    버프된 챔피언
+                                    <div class="burf_champ">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <strong><h5 class="text-primary">1</h5></strong></div>
+                                            <div class="col-md-3">
+
+                                                <!--Image-->
+                                                <div class="view overlay rounded z-depth-1">
+                                                    <img src="http://ddragon.leagueoflegends.com/cdn/9.20.1/img/champion/Hecarim.png"
+                                                         class="img-fluid" alt="Minor sample post image">
+                                                    <a>
+                                                        <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--Excerpt-->
+                                            <div class="col-md-8">
+                                                <p class="dark-grey-text">
+                                                    <strong>헤카림</strong>
+                                                </p>
+                                                <a><strong class="text-muted">승률 53.42%(+2.44%)</strong>
+                                                    <i class="fas fa-angle-right float-right"></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="burf_champ">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <strong><h5 class="text-primary">2</h5></strong></div>
+                                            <div class="col-md-3">
+
+                                                <!--Image-->
+                                                <div class="view overlay rounded z-depth-1">
+                                                    <img src="http://ddragon.leagueoflegends.com/cdn/9.20.1/img/champion/Akali.png"
+                                                         class="img-fluid" alt="Minor sample post image">
+                                                    <a>
+                                                        <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--Excerpt-->
+                                            <div class="col-md-8">
+                                                <p class="dark-grey-text">
+                                                    <strong>아칼리</strong>
+                                                </p>
+                                                <a><strong class="text-muted">승률 48.33%(+2.32%)</strong>
+                                                    <i class="fas fa-angle-right float-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="burf_champ">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <strong><h5 class="text-primary">2</h5></strong></div>
+                                            <div class="col-md-3">
+
+                                                <!--Image-->
+                                                <div class="view overlay rounded z-depth-1">
+                                                    <img src="http://ddragon.leagueoflegends.com/cdn/9.20.1/img/champion/Evelynn.png"
+                                                         class="img-fluid" alt="Minor sample post image">
+                                                    <a>
+                                                        <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--Excerpt-->
+                                            <div class="col-md-8">
+                                                <p class="dark-grey-text">
+                                                    <strong>이블린</strong>
+                                                </p>
+                                                <a><strong class="text-muted">승률 51.05%(+1.66%)</strong>
+                                                    <i class="fas fa-angle-right float-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nurf_champs">
+                                    너프된 챔피언
+                                    <div class="nurf_champ">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <strong><h5 class="text-primary">1</h5></strong></div>
+                                            <div class="col-md-3">
+
+                                                <!--Image-->
+                                                <div class="view overlay rounded z-depth-1">
+                                                    <img src="http://ddragon.leagueoflegends.com/cdn/9.20.1/img/champion/Nocturne.png"
+                                                         class="img-fluid" alt="Minor sample post image">
+                                                    <a>
+                                                        <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--Excerpt-->
+                                            <div class="col-md-8">
+                                                <p class="dark-grey-text">
+                                                    <strong>녹턴</strong>
+                                                </p>
+                                                <a><strong class="text-muted">승률 50.60%(-0.55%)</strong>
+                                                    <i class="fas fa-angle-right float-right"></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="nurf_champ">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <strong><h5 class="text-primary">1</h5></strong></div>
+                                            <div class="col-md-3">
+
+                                                <!--Image-->
+                                                <div class="view overlay rounded z-depth-1">
+                                                    <img src="http://ddragon.leagueoflegends.com/cdn/9.20.1/img/champion/Sett.png"
+                                                         class="img-fluid" alt="Minor sample post image">
+                                                    <a>
+                                                        <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--Excerpt-->
+                                            <div class="col-md-8">
+                                                <p class="dark-grey-text">
+                                                    <strong>세트</strong>
+                                                </p>
+                                                <a><strong class="text-muted">승률 49.28%(-0.58%)</strong>
+                                                    <i class="fas fa-angle-right float-right"></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="nurf_champ">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <strong><h5 class="text-primary">1</h5></strong></div>
+                                            <div class="col-md-3">
+
+                                                <!--Image-->
+                                                <div class="view overlay rounded z-depth-1">
+                                                    <img src="http://ddragon.leagueoflegends.com/cdn/9.20.1/img/champion/Ashe.png"
+                                                         class="img-fluid" alt="Minor sample post image">
+                                                    <a>
+                                                        <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--Excerpt-->
+                                            <div class="col-md-8">
+                                                <p class="dark-grey-text">
+                                                    <strong>애쉬</strong>
+                                                </p>
+                                                <a><strong class="text-muted">승률 51.42%(-0.58%)</strong>
+                                                    <i class="fas fa-angle-right float-right"></i>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="https://kr.leagueoflegends.com/ko-kr/news/game-updates/patch-10-15-notes/"
+                               class="text-center my-5 font-weight-bold">10.15패치 노트</a>
+                            <div class="B_N_list">
+                                <div class="burf_champ">버프된 챔피언</div>
+                                <div class="nurf_champ">너프된 챔피언</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Section: Team v.3 -->
+            <hr class="my-5">
+
+            <!--Section: Magazine v.1-->
+            <div id="magazine" class="wow fadeIn">
+
+                <!--Section heading-->
+                <h2 class="h3 text-center my-5 font-weight-bold">라인 별 챔피언 추천</h2>
+
+                <div class="h1 text-center my-5 font-weight-bold">
+                    <button data-toggle="modal" data-target="#Top_modal" type="button"
+                            class="btn btn-outline-primary waves-effect">탑
+                    </button>
+                    <button data-toggle="modal" data-target="#Mid_modal" type="button"
+                            class="btn btn-outline-primary waves-effect">미드
+                    </button>
+                    <button data-toggle="modal" data-target="#Jungle_modal" type="button"
+                            class="btn btn-outline-primary waves-effect">정글
+                    </button>
+                    <button data-toggle="modal" data-target="#AD_modal" type="button"
+                            class="btn btn-outline-primary waves-effect">원딜
+                    </button>
+                    <button data-toggle="modal" data-target="#Support_modal" type="button"
+                            class="btn btn-outline-primary waves-effect">서포터
+                    </button>
+                </div>
+            </div>
+            <!--/Section: Magazine v.1-->
+            <hr>
+        </main>
+    </body>
+
+</html>

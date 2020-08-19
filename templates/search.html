@@ -1,0 +1,25 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<head>
+    <title>전적검색결과</title>
+</head>
+<body>
+    <p>
+        {{sum_name}}님의 전적검색결과
+    </p>
+    <p>
+        게임 ID : {{Game_Ids[0]}}
+    </p>
+    <hr>
+    <p>
+           매치된 게임 정보 : {{Match_list[0]}} <br>
+        <br>
+           매치된 게임 정보의 챔피언 번호 : {{Match_list[0]['champion']}} <br>
+           매치된 게임 정보의 큐 타입 : {{Match_list[0]['queue']}} <br>
+           매치된 게임 정보의 포지션 : {{Match_list[0]['lane']}} <br>
+
+    </p>
+    <form action = '/'>
+        <input type="submit" value="뒤로가기"/>
+    </form>
+</body>
