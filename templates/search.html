@@ -1,25 +1,353 @@
 <!-- search.html -->
 <!DOCTYPE html>
 <head>
-    <title>전적검색결과</title>
-</head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>BSG.KR</title></head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">BSG.KR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/statics">통계</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/statics">랭킹</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        추천 유튜버
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">탑</a>
+                        <a class="dropdown-item" href="#">정글</a>
+                        <a class="dropdown-item" href="#">미드</a>
+                        <a class="dropdown-item" href="#">원딜</a>
+                        <a class="dropdown-item" href="#">서폿</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/search" autocomplete="off">
+                <input class="form-control mr-sm-2" type="text" name="name" placeholder="소환사명 닉네임" aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
+            </form>
+        </div>
+    </nav>
     <p>
         {{sum_name}}님의 전적검색결과
     </p>
-    <p>
-        게임 ID : {{Game_Ids[0]}}
-    </p>
+    <div class="user_info">
+        {% if length != 0 %}
+        {% for result in results_user_info %}
+        <div> {{result[0]}}</div>
+        <div> {{result[1]}} {{result[2]}} 리그</div>
+        <div> {{result[-1]}} LP</div>
+        <div> {{result[3]}} 승 {{result[4]}} 패</div>
+        <div> {{result[5]}}</div>
+        <br>
+        {% endfor %}
+        {% else %}
+        <div>아직 리그가 없습니다. 분발하세요!</div>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="mastery_info">
+        {% if length != 0 %}
+        {% for result in results_champ_mastery[0] %}
+        <div> 챔피언 {{result[0]}}</div>
+        <div> 챔피언 숙련도 레벨 {{result[1]}}</div>
+        <div> 챔피언 숙련도 점수 {{result[2]}}</div>
+        <div> 챔피언 숙련도 다음 레벨까지 필요한 포인트 {{result[3]}}</div>
+        <br>
+        {% endfor %}
+        {% else %}
+        <div>아직 플레이한 챔피언이 없습니다</div>
+        {% endif %}
+    </div>
     <hr>
     <p>
-           매치된 게임 정보 : {{Match_list[0]}} <br>
+        매치된 게임 정보 : {{Match_list[0]}} <br>
         <br>
-           매치된 게임 정보의 챔피언 번호 : {{Match_list[0]['champion']}} <br>
-           매치된 게임 정보의 큐 타입 : {{Match_list[0]['queue']}} <br>
-           매치된 게임 정보의 포지션 : {{Match_list[0]['lane']}} <br>
+        매치된 게임 정보의 챔피언 번호 : {{Match_list[0]['champion']}} <br>
+        매치된 게임 정보의 큐 타입 : {{Match_list[0]['queue']}} <br>
+        매치된 게임 정보의 포지션 : {{Match_list[0]['lane']}} <br>
+        <!--        매치된 게임 정보의 팀정보 : {{teams_list}} <br>-->
+        <!--        매치된 게임 정보의 플레이어 : {{player_list}} <br>-->
+
+
+    <div class="GameItemWrap">
+        <div class="GameItem Lose" data-summoner-id="55520319" data-game-time="1597851253" data-game-id="4588740008"
+             data-game-result="lose">
+            <div class="Content">
+                <div class="GameStats">
+                    <div class="GameType" title="무작위 총력전">
+                        무작위 총력전
+                    </div>
+                    <div class="TimeStamp"><span class="_timeago _timeCountAssigned tip" data-datetime="1597851253"
+                                                 data-type="" data-interval="60"
+                                                 title="2020년 8월 20일 오전 12시 34분">12시간 전</span></div>
+                    <div class="Bar"></div>
+                    <div class="GameResult">
+                        패배
+                    </div>
+                    <div class="GameLength">21분 30초</div>
+
+                </div>
+                <div class="GameSettingInfo">
+                    <div class="ChampionImage">
+                        <a href="/champion/yone/statistics" target="_blank"><img
+                                src="//opgg-static.akamaized.net/images/lol/champion/Yone.png?image=q_auto,w_46&amp;v=1596679559"
+                                class="Image" alt="요네"></a>
+                    </div>
+
+                    <div class="SummonerSpell">
+                        <div class="Spell">
+                            <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerExhaust.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip"
+                                 title="<b style='color: #ffc659'>탈진</b><br><span>적 챔피언을 지치게 만들어 3초 동안 이동 속도를 30% 느리게 하고 이 동안 가하는 피해량을 40% 낮춥니다.</span>"
+                                 alt="탈진">
+                        </div>
+                        <div class="Spell">
+                            <img src="//opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip tpd-delegation-uid-1" title="" alt="점멸">
+                        </div>
+                    </div>
+                    <div class="Runes">
+                        <div class="Rune">
+                            <img src="//opgg-static.akamaized.net/images/lol/perk/8010.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip"
+                                 title="<b style='color: #ffc659'>정복자</b><br><span>적 챔피언에게 기본 공격 또는 스킬로 피해를 입히면 6초 동안 정복자 중첩을 2만큼 얻어 중첩마다 1.7~4.2의 <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>적응형 능력치</font></lol-uikit-tooltipped-keyword>를 얻습니다. 최대 12회까지 중첩됩니다. 원거리 챔피언은 기본 공격으로 중첩을 1만 획득할 수 있습니다.<br><br>최대로 중첩되면 챔피언에게 입힌 피해량의 15%만큼 체력을 회복합니다. (원거리 챔피언은 8%)</span>"
+                                 alt="정복자">
+                        </div>
+                        <div class="Rune">
+                            <img src="//opgg-static.akamaized.net/images/lol/perkStyle/8100.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip tpd-delegation-uid-1" title="" alt="지배">
+                        </div>
+                    </div>
+                    <div class="ChampionName">
+                        <a href="/champion/yone/statistics" target="_blank">요네</a>
+                    </div>
+                </div>
+                <div class="KDA">
+                    <div class="KDA">
+                        <span class="Kill">11</span> /
+                        <span class="Death">13</span> /
+                        <span class="Assist">8</span>
+                    </div>
+                    <div class="KDARatio">
+                        <span class="KDARatio ">1.46:1</span> 평점
+                    </div>
+                    <div class="MultiKill">
+                        <span class="Kill">트리플킬</span>
+                    </div>
+                </div>
+                <div class="Stats">
+                    <div class="Level">
+                        레벨18
+                    </div>
+                    <div class="CS">
+                        <span class="CS tip" title="미니언 65  + 몬스터 0<br>분당CS 3개">65 (3)</span> CS
+                    </div>
+                    <div class="CKRate tip tpd-delegation-uid-1" title="">
+                        킬관여 63%
+                    </div>
+                </div>
+                <div class="Items">
+                    <div class="ItemList">
+                        <div class="Item">
+                            <img src="//opgg-static.akamaized.net/images/lol/item/3031.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip"
+                                 title="<b style='color: #00cfbc'>무한의 대검</b><br><span>치명타 확률이 대폭 증가합니다.</span><br><span><stats>공격력 +80<br>치명타 확률 +25%</stats><br><br><unique>고유 지속 효과:</unique> 치명타가 피해량의 200%가 아닌 225%를 가합니다.</span><br><span>가격:</span> <span style='color: #ffc659'>3400 (425)</span>"
+                                 alt="무한의 대검">
+                        </div>
+                        <div class="Item">
+                            <img src="//opgg-static.akamaized.net/images/lol/item/3812.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip"
+                                 title="<b style='color: #00cfbc'>죽음의 무도</b><br><span>입은 피해 적용이 잠시 미뤄집니다.</span><br><span><stats>공격력 +50<br>방어력 +30<br>마법 저항력 +30<br>재사용 대기시간 감소 +10%</stats><br><br><unique>고유 지속 효과:</unique> 적에게 가한 피해량의 15%만큼 체력을 회복합니다. 이 효과는 광역 피해에는 33%만 적용됩니다.<br><unique>고유 지속 효과:</unique> 입은 피해의 <specialRules>30%(근접 챔피언)/10%(원거리 챔피언)</specialRules>가 3초 동안 지속되는 출혈 효과로 전환됩니다.</span><br><span>가격:</span> <span style='color: #ffc659'>3600 (500)</span>"
+                                 alt="죽음의 무도">
+                        </div>
+                        <div class="Item">
+                            <img src="//opgg-static.akamaized.net/images/lol/item/3140.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip"
+                                 title="<b style='color: #00cfbc'>수은 장식띠</b><br><span>사용하면 모든 군중 제어 효과가 제거됩니다.</span><br><span><stats>마법 저항력 +30</stats><br><br><active>고유 사용 효과 - 수은:</active> 챔피언에게 걸린 모든 군중 제어 효과를 제거합니다. (재사용 대기시간 90초)</span><br><span>가격:</span> <span style='color: #ffc659'>1300 (850)</span>"
+                                 alt="수은 장식띠">
+                        </div>
+                        <div class="Item">
+                            <img src="//opgg-static.akamaized.net/images/lol/item/2052.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip"
+                                 title="<b style='color: #00cfbc'>포로 간식</b><br><span>방목해서 신선한 풀을 먹여 키운 아바로사 암탉과 화학 비료를 쓰지 않고 재배한 프렐요드산 유기농 허브로 맛있게 조리한 영양 만점 요리. 포로에게 먹이면 신나서 갸르릉거립니다.<br><br><i>수익금은 전액 녹서스 동물 학대 반대 운동 기금으로 기부됩니다.</i></span>"
+                                 alt="포로 간식">
+                        </div>
+                        <div class="Item">
+                            <img src="//opgg-static.akamaized.net/images/lol/item/3046.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip tpd-delegation-uid-1" title="" alt="유령 무희">
+                        </div>
+                        <div class="Item">
+                            <img src="//opgg-static.akamaized.net/images/lol/item/1053.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip tpd-delegation-uid-1" title="" alt="흡혈의 낫">
+                        </div>
+                        <div class="Item">
+                            <img src="//opgg-static.akamaized.net/images/lol/item/3006.png?image=q_auto,w_22&amp;v=1596679559"
+                                 class="Image tip tpd-delegation-uid-1" title="" alt="광전사의 군화">
+                        </div>
+                        <button class="Button OpenBuildButton tip tpd-delegation-uid-1" title="" type="button">
+                            <img class="On" src="//opgg-static.akamaized.net/css3/sprite/images/icon-buildred-p.png">
+                            <img class="Off" src="//opgg-static.akamaized.net/css3/sprite/images/icon-buildred-p.png">
+                        </button>
+                    </div>
+                </div>
+                <div class="FollowPlayers Names">
+                    <div class="Team">
+                        <div class="Summoner Requester">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-141 tip" title="요네">요네</div>
+                                <div class="Image20 __sprite __spc20 __spc20-141 tip" title="요네">요네</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EB%A0%88%EB%A7%88%EB%8B%A4" class="Link"
+                                   target="_blank">레마다</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-68 tip" title="럭스">럭스</div>
+                                <div class="Image20 __sprite __spc20 __spc20-68 tip" title="럭스">럭스</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EC%95%8C%ED%8C%8C%EB%AA%AC+%EA%B0%81%EC%84%B1%EB%AA%A8%EB%93%9C"
+                                   class="Link" target="_blank">알파몬 각성모드</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-44 tip" title="잭스">잭스</div>
+                                <div class="Image20 __sprite __spc20 __spc20-44 tip" title="잭스">잭스</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EB%88%88+%EC%B0%90%EB%B9%B5" class="Link"
+                                   target="_blank">눈 찐빵</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-1 tip" title="아리">아리</div>
+                                <div class="Image20 __sprite __spc20 __spc20-1 tip" title="아리">아리</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EB%8D%94%EC%9D%B4%EC%83%81%EC%9D%80%EB%AC%B4%EB%A6%AC"
+                                   class="Link" target="_blank">더이상은무리</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-70 tip" title="말자하">말자하</div>
+                                <div class="Image20 __sprite __spc20 __spc20-70 tip" title="말자하">말자하</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EA%B9%9C%EB%8C%95%EC%9D%B4%EA%B0%80+%EB%B9%A1%EC%B9%98%EB%A9%B4"
+                                   class="Link" target="_blank">깜댕이가 빡치면</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Team">
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-46 tip" title="진">진</div>
+                                <div class="Image20 __sprite __spc20 __spc20-46 tip" title="진">진</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EB%9D%B5%EB%8F%84%EC%9B%85+%EB%95%A1%EB%8F%84%EC%9B%85"
+                                   class="Link" target="_blank">띵도웅 땡도웅</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-24 tip" title="에코">에코</div>
+                                <div class="Image20 __sprite __spc20 __spc20-24 tip" title="에코">에코</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=BisKroper" class="Link"
+                                   target="_blank">BisKroper</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-115 tip" title="탐 켄치">탐 켄치</div>
+                                <div class="Image20 __sprite __spc20 __spc20-115 tip" title="탐 켄치">탐 켄치</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EB%8B%A8%EB%B2%88%EC%97%90%EB%B8%8C%EB%A1%A0%EC%A6%88"
+                                   class="Link" target="_blank">단번에브론즈</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-29 tip tpd-delegation-uid-1" title="">피오라
+                                </div>
+                                <div class="Image20 __sprite __spc20 __spc20-29 tip" title="피오라">피오라</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%ED%86%B5%EC%88%98%EC%99%95%EC%BA%AC%EB%A3%A8"
+                                   class="Link" target="_blank">통수왕캬루</a>
+                            </div>
+                        </div>
+                        <div class="Summoner ">
+                            <div class="ChampionImage">
+                                <div class="Image16 __sprite __spc16 __spc16-130 tip" title="베이가">베이가</div>
+                                <div class="Image20 __sprite __spc20 __spc20-130 tip" title="베이가">베이가</div>
+                            </div>
+                            <div class="SummonerName">
+                                <a href="//www.op.gg/summoner/userName=%EC%95%84%EB%8B%88%EA%B7%BC%EB%8D%B0%EC%A7%84%EC%A7%9C%EC%95%BC%EB%B0%9C"
+                                   class="Link" target="_blank">아니근데진짜야발</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="StatsButton">
+                    <div class="Content">
+                        <div class="Item">
+                            <a id="right_match" href="#" class="Button MatchDetail">
+                                <span class="__spSite __spSite-198 Off"></span>
+                                <span class="__spSite __spSite-197 On"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="GameDetail"></div>
+        </div>
+    </div>
 
     </p>
-    <form action = '/'>
+    <form action='/'>
         <input type="submit" value="뒤로가기"/>
     </form>
 </body>

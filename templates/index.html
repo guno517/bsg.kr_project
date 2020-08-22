@@ -127,11 +127,100 @@
                 flex-direction: column;
             }
 
+            .nurf_champs {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .nurf_champ {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .B_N_list img {
+                margin-top: 10px;
+                width: 80%;
+                height: 80%
+            }
+
+            .carousel-inner img {
+                width: 680px;
+                height: 390px;
+            }
+
         </style>
 
     </head>
 
     <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">BSG.KR</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/statics">통계</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/statics">랭킹</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            추천 유튜버
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">탑</a>
+                            <a class="dropdown-item" href="#">정글</a>
+                            <a class="dropdown-item" href="#">미드</a>
+                            <a class="dropdown-item" href="#">원딜</a>
+                            <a class="dropdown-item" href="#">서폿</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="/search" autocomplete="off">
+                    <input class="form-control mr-sm-2" type="text" name="name" placeholder="소환사명 닉네임" aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
+                </form>
+            </div>
+        </nav>
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://image.dongascience.com/Photo/2018/10/545f40b81fb585cf98e09303a3e8905c.png"
+                         class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.insight.co.kr/static/2018/12/10/700/sp4f946h4043lh620m7q.jpg"
+                         class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrPEiAyvAjWn-9rj07tcDgWhTj3zHsvhy0mQ&usqp=CAU"
+                         class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
         <main class="mt-5 pt-5">
             <div class="container">
 
@@ -141,16 +230,15 @@
                         <strong>BSG.KR</strong>
                     </h1>
 
-                    <form action="/search">
-                        <input type="text" name="name"/>
-                        <input type="submit" value="Submit"/>
-                    </form>
+                    <!--                    <form action="/search">-->
+                    <!--                        <input type="text" name="name"/>-->
+                    <!--                        <input type="submit" value="검색"/>-->
+                    <!--                    </form>-->
 
-                    <form class="summoner-search-form" action="/summoner/" autocomplete="off">
-                        <input type="text" name="userName" class="summoner-search-form__text _suggest"
+                    <form class="summoner-search-form" action="/search" autocomplete="off">
+                        <input type="text" name="name" class="summoner-search-form__text _suggest"
                                placeholder="소환사명 닉네임" autocomplete="off">
-                        <button type="submit" class="btn btn-primary btn-lg summoner-search-form__button"> 검색
-                        </button>
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
                     </form>
                 </div>
 
@@ -643,7 +731,7 @@
                                     <div class="burf_champ">
                                         <div class="row">
                                             <div class="col-md-1">
-                                                <strong><h5 class="text-primary">2</h5></strong></div>
+                                                <strong><h5 class="text-primary">3</h5></strong></div>
                                             <div class="col-md-3">
 
                                                 <!--Image-->
@@ -699,7 +787,7 @@
                                     <div class="nurf_champ">
                                         <div class="row">
                                             <div class="col-md-1">
-                                                <strong><h5 class="text-primary">1</h5></strong></div>
+                                                <strong><h5 class="text-primary">2</h5></strong></div>
                                             <div class="col-md-3">
 
                                                 <!--Image-->
@@ -726,7 +814,7 @@
                                     <div class="nurf_champ">
                                         <div class="row">
                                             <div class="col-md-1">
-                                                <strong><h5 class="text-primary">1</h5></strong></div>
+                                                <strong><h5 class="text-primary">3</h5></strong></div>
                                             <div class="col-md-3">
 
                                                 <!--Image-->
@@ -755,14 +843,15 @@
 
                             <a href="https://kr.leagueoflegends.com/ko-kr/news/game-updates/patch-10-15-notes/"
                                class="text-center my-5 font-weight-bold">10.15패치 노트</a>
-                            <div class="B_N_list">
-                                <div class="burf_champ">버프된 챔피언</div>
-                                <div class="nurf_champ">너프된 챔피언</div>
-                            </div>
+                            <p>
+                                <a href="https://kr.leagueoflegends.com/ko-kr/news/game-updates/patch-10-14-notes/"
+                                   class="text-center my-5 font-weight-bold">10.14패치 노트</a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Section: Team v.3 -->
             <hr class="my-5">
 
@@ -792,6 +881,39 @@
             </div>
             <!--/Section: Magazine v.1-->
             <hr>
+            <section>
+                <h2 class="h3 text-center my-5 font-weight-bold">추천 영상</h2>
+                <div class="container">
+                    <div class="card-group card-group-scroll">
+
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://upload2.inven.co.kr/upload/2018/03/30/bbs/i15935489049.jpg"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">챔피언 10분 강의</h5>
+                                <p class="card-text">원딜에 대해 배우고 싶다면.</p>
+                                <a href="https://www.youtube.com/channel/UCoOQUteD_4wor08wTCb_OuQ"
+                                   class="btn btn-primary">강의 보러가기</a>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <iframe width="100%" height="250"
+                                    src="https://www.youtube.com/channel/UC58e7PIf49oMlDljMFPSy0w"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen=""></iframe>
+                            <div class="card-body">
+                                <h5 class="card-title">원딜 추천
+                                    <div class="text-right">악시</div>
+                                </h5>
+                                <p class="card-text">챌린저 원딜 악시</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
         </main>
     </body>
 
