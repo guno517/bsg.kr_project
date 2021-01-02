@@ -8,26 +8,23 @@
 
 
 > 프로젝트 간략 소개 한 문장 
-- 웹사이트 url / (챗봇일 경우)텔레그램 등 메신저 주소
-- 사이트에 대한 1-2단락 설명
+- RIOT API를 이용한 전적 검색 사이트
 
 ## 핵심 기능  Key Feature
 - 리그 오브 레전드 게임 유저의 최근 전적 20게임을 불러와 볼 수 있다.
 - 리그 오브 레전드 패치별 챔피언 티어를 정한다.
 
 ## 사용 How To Use
-- 사용하고 싶도록 유용한 몇 가지 예를 적습니다. 코드 블록과 스크린샷 포함.
-- (wiki가 있을 경우) _더 많은 예시와 사용 예제는 [Wiki](wiki)를 참고하세요._
-![](header.png)
+
 
 ## Contributing
 *(프로젝트 기여자가 있을 경우 적습니다)*
-- Thanks to @기여자이름
+
 
 ## Reference
 *(참고 리소스,  code snippet, 라이센스 정보를 표기합니다)*
-- (예시) [네이버 지도 API](링크url) : 장소카드 지도화면에 사용
-- (예시) [Teachable Machine](https://teachablemachine.withgoogle.com/) : 절하는 pose MachineLearning Model 
+- [RIOT API](링크url) : 소환사 전적 검색
+- [Teachable Machine](https://teachablemachine.withgoogle.com/) : 절하는 pose MachineLearning Model 
 
 ## Links
 *(사람이 읽기 쉽게 요약된 링크 정보를 추가합니다. 현재 리포지토리의 정보를 적습니다)*
@@ -35,12 +32,10 @@
 - Repository: (예시) https://github.com/ohahohah/github-tutorial
 - 관련 프로젝트
   - 프로젝트 이름 : (예시) https://github.com/ohahohah/readme-template
-  - 프로젝트 이름: (예시) https://github.com/someones/awesome-project/
 
 ## License
 *(공동작업자가 있을 경우 모두 적어줍니다)*  
-이름1 – [이메일 주소1](mailto:이메일주소@example.com)  
-이름2 - [이메일 주소2](mailto:이메일주소@example.com)  
+변건오 – bgo517@gachon.co.kr  
 
 XYZ license를 준수합니다. ``LICENSE``에서 자세한 정보를 확인할 수 있습니다.  
 (예시) [https://github.com/yourname/github-link/LICENSE.md](https://github.com/ohahohah/)
